@@ -2,6 +2,7 @@ const express = require('express')
 const bodyParser = require('body-parser')
 const mongoose = require('mongoose')
 const postRoutes = require('./routes/posts')
+const path = require('path')
 
 
 const app = express()
@@ -18,6 +19,7 @@ app.use(bodyParser.json())
 
 // for url encoded data
 app.use(bodyParser.urlencoded({ extended: false }))
+app.use('/images', express.static(path.join('backend/images')))
 
 app.use((req, res, next) => {
   res.setHeader('Access-Control-Allow-Origin', '*')
@@ -26,6 +28,6 @@ app.use((req, res, next) => {
   next()
 })
 
-app.use('/api/posts',postRoutes)
+app.use('/api/posts', postRoutes)
 
 module.exports = app

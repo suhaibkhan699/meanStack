@@ -10,3 +10,11 @@
 .cursor-pointer {
   cursor: pointer;
 }
+
+.post-image {
+  width: 10%;
+}
+
+.post-image img {
+  width: 100%;
+}

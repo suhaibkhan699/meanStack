@@ -39,10 +39,11 @@ export class PostCreateComponent implements OnInit {
         this.postId = paramMap.get('postId') || '';
         this.postCreateService.getPost(this.postId).
           subscribe(postData => {
-            this.post = { id: postData.post._id, title: postData.post.title, content: postData.post.content, imagePath: '' }
+            this.post = { id: postData.post._id, title: postData.post.title, content: postData.post.content, imagePath: postData.post.imagePath }
             this.form.setValue({
               'title': this.post.title,
-              'content': this.post.content
+              'content': this.post.content,
+              'image': this.post.imagePath
             })
           })
       }
@@ -58,11 +59,11 @@ export class PostCreateComponent implements OnInit {
       return;
     }
     if (this.mode === 'create') {
-      const post: Post = { id: '', title: this.form.value.title, content: this.form.value.content, imagePath: this.form.value.imagePath }
+      const post: Post = { id: '', title: this.form.value.title, content: this.form.value.content, imagePath: this.form.value.image }
       this.postCreateService.addPost(post)
     }
     else {
-      this.postCreateService.updatePost({ id: this.postId, title: this.form.value.title, content: this.form.value.content, imagePath: '' })
+      this.postCreateService.updatePost({ id: this.postId, title: this.form.value.title, content: this.form.value.content, imagePath: this.form.value.image })
     }
     this.form.reset()
 

@@ -10,6 +10,9 @@
           <a class="fa fa-trash-o cursor-pointer" (click)="onDeleteClick(post.id)"></a>
         </div>
       </div>
+      <div class="post-image">
+        <img [src]="post.imagePath" [alt]="post.title">
+      </div>
       <div attr.id="tab_{{post?.id}}" class="collapse show" data-bs-parent="#accordion">
         <div class="card-body">
           {{post?.content}}

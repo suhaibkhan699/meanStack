@@ -22,7 +22,8 @@ export class PostCreateService {
           return {
             id: post._id,
             title: post.title,
-            content: post.content
+            content: post.content,
+            imagePath: post.imagePath
           }
         })
       }))
@@ -56,10 +57,26 @@ export class PostCreateService {
   }
 
   updatePost(post: Post) {
-    this.http.put(`http://localhost:3000/api/posts/${post.id}`, post).
+    let postData
+    if (typeof (post.imagePath) === 'object') {
+      postData = new FormData()
+      postData.append('id', post.id)
+      postData.append('title', post.title)
+      postData.append('content', post.content)
+      postData.append('image', post.imagePath, post.title)
+    }
+    else {
+      postData = {
+        id: post.id,
+        title: post.title,
+        content: post.content,
+        imagePath: post.imagePath
+      }
+    }
+    this.http.put(`http://localhost:3000/api/posts/${post.id}`, postData).
       subscribe((res) => {
         const updatedPosts = [...this.posts]
-        const oldPostIndex = updatedPosts.findIndex(p => p.id === post.id)
+        const oldPostIndex = updatedPosts.findIndex(p => p.id === postData.id)
         updatedPosts[oldPostIndex] = post
         this.posts = updatedPosts
         this.post$.next([...this.posts])
@@ -80,7 +97,7 @@ export class PostCreateService {
   }
 
   getPost(id: string) {
-    return this.http.get<{ post: { _id: string, title: string, content: string } }>(`http://localhost:3000/api/posts/${id}`)
+    return this.http.get<{ post: { _id: string, title: string, content: string, imagePath: string } }>(`http://localhost:3000/api/posts/${id}`)
     // return { ...this.posts?.find(post => post.id === id) }
   }
 }
