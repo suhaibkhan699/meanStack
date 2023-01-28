@@ -17,12 +17,14 @@ export class PostCreateComponent implements OnInit {
   private postId!: string
   form: FormGroup
   imagePreview: string
+  userId: string
 
   constructor(
     private postCreateService: PostCreateService,
     public route: ActivatedRoute) { }
 
   ngOnInit(): void {
+    this.userId = localStorage.getItem('userId')
     this.form = new FormGroup({
       'title': new FormControl(null, {
         validators: [Validators.required, Validators.minLength(3)]
@@ -39,7 +41,7 @@ export class PostCreateComponent implements OnInit {
         this.postId = paramMap.get('postId') || '';
         this.postCreateService.getPost(this.postId).
           subscribe(postData => {
-            this.post = { id: postData.post._id, title: postData.post.title, content: postData.post.content, imagePath: postData.post.imagePath }
+            this.post = { id: postData.post._id, title: postData.post.title, content: postData.post.content, imagePath: postData.post.imagePath, creator: postData.post.creator }
             this.form.setValue({
               'title': this.post.title,
               'content': this.post.content,
@@ -59,11 +61,11 @@ export class PostCreateComponent implements OnInit {
       return;
     }
     if (this.mode === 'create') {
-      const post: Post = { id: '', title: this.form.value.title, content: this.form.value.content, imagePath: this.form.value.image }
+      const post: Post = { id: '', title: this.form.value.title, content: this.form.value.content, imagePath: this.form.value.image, creator: this.userId }
       this.postCreateService.addPost(post)
     }
     else {
-      this.postCreateService.updatePost({ id: this.postId, title: this.form.value.title, content: this.form.value.content, imagePath: this.form.value.image })
+      this.postCreateService.updatePost({ id: this.postId, title: this.form.value.title, content: this.form.value.content, imagePath: this.form.value.image, creator: this.userId })
     }
     this.form.reset()
 

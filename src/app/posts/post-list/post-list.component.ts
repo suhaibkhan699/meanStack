@@ -16,11 +16,13 @@ export class PostListComponent implements OnInit {
   private _postSubscription!: Subscription;
   private authListenerSubs: Subscription
   userIsAuthenticated = false
+  userId: string
 
   constructor(private postCreateService: PostCreateService, private authService: AuthService) { }
 
   ngOnInit(): void {
     this.postCreateService.getPosts()
+    this.userId = this.authService.getUserId()
     this._postSubscription = this.postCreateService.getNewPost().subscribe((posts: Post[]) => {
       this.posts = posts
     })
@@ -28,6 +30,7 @@ export class PostListComponent implements OnInit {
     this.userIsAuthenticated = this.authService.getIsAuth()
     this.authListenerSubs = this.authService.getAuthStatusListener().subscribe(isAuthenticated => {
       this.userIsAuthenticated = isAuthenticated
+      this.userId = this.authService.getUserId()
     })
   }
 

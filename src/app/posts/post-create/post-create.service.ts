@@ -23,7 +23,8 @@ export class PostCreateService {
             id: post._id,
             title: post.title,
             content: post.content,
-            imagePath: post.imagePath
+            imagePath: post.imagePath,
+            creator: post.creator
           }
         })
       }))
@@ -45,11 +46,11 @@ export class PostCreateService {
           id: response.post._id,
           title: response.post.title,
           content: response.post.content,
-          imagePath: response.post.imagePath
+          imagePath: response.post.imagePath,
+          creator: response.post.creator
         }
       }))
       .subscribe((post) => {
-
         this.posts.push(post)
         this.post$.next([...this.posts])
         this.router.navigate(['/'])
@@ -97,7 +98,7 @@ export class PostCreateService {
   }
 
   getPost(id: string) {
-    return this.http.get<{ post: { _id: string, title: string, content: string, imagePath: string } }>(`http://localhost:3000/api/posts/${id}`)
+    return this.http.get<{ post: { _id: string, title: string, content: string, imagePath: string, creator: string } }>(`http://localhost:3000/api/posts/${id}`)
     // return { ...this.posts?.find(post => post.id === id) }
   }
 }
