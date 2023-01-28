@@ -5,7 +5,7 @@
         <a class="btn" data-bs-toggle="collapse" [attr.href]="'#tab_' + post?.id">
           {{post?.title}}
         </a>
-        <div class="icons">
+        <div class="icons" *ngIf="userIsAuthenticated">
           <a class="fa fa-edit cursor-pointer" [routerLink]="['/edit',post.id]"></a>&nbsp;|&nbsp;
           <a class="fa fa-trash-o cursor-pointer" (click)="onDeleteClick(post.id)"></a>
         </div>

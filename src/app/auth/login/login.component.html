@@ -1,0 +1,14 @@
+<form (submit)="onLogin(loginForm)" #loginForm="ngForm">
+  <h2>Log In</h2>
+  <div class="container mb-3 mt-3">
+    <label for="email">E-mail:</label>
+    <input type="email" class="form-control" id="email" name="email" #emailInput="ngModel" ngModel required email />
+    <br />
+
+    <label for="password">Password:</label>
+    <input type="password" class="form-control" id="password" name="password" ngModel #passwordInput="ngModel"
+      required />
+    <br />
+    <button class="btn btn-primary" type="submit">Login</button>
+  </div>
+</form>
