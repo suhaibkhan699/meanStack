@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subject } from 'rxjs';
-import { AuthData } from './auth-data.model';
+import { AuthData } from './auth/auth-data.model';
 
 @Injectable({
   providedIn: 'root'

@@ -2,7 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { PostCreateService } from '../post-create/post-create.service'
 import { BehaviorSubject, Subject, Subscription } from 'rxjs';
 import { Post } from '../post.model';
-import { AuthService } from 'src/app/auth/auth.service';
+import { AuthService } from 'src/app/auth.service';
 
 
 
