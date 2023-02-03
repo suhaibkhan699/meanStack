@@ -4,6 +4,9 @@ import { Post } from '../post.model';
 import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs';
 import { Router } from '@angular/router';
+import { environment } from 'src/environments/environment';
+
+const BACKEND_URL = `${environment.apiUrl}/posts`
 
 @Injectable({
   providedIn: 'root'
@@ -16,7 +19,7 @@ export class PostCreateService {
     private router: Router) { }
 
   getPosts() {
-    this.http.get<{ message: string, posts: any }>('http://localhost:3000/api/posts')
+    this.http.get<{ message: string, posts: any }>(`${BACKEND_URL}`)
       .pipe(map((postData) => {
         return postData.posts.map((post: any) => {
           return {
@@ -40,7 +43,7 @@ export class PostCreateService {
     postData.append('content', post.content)
     postData.append('image', post.imagePath, post.title)
 
-    this.http.post<{ message: string, post: Post }>('http://localhost:3000/api/posts', postData)
+    this.http.post<{ message: string, post: Post }>(`${BACKEND_URL}`, postData)
       .pipe(map((response: any) => {
         return {
           id: response.post._id,
@@ -74,7 +77,7 @@ export class PostCreateService {
         imagePath: post.imagePath
       }
     }
-    this.http.put(`http://localhost:3000/api/posts/${post.id}`, postData).
+    this.http.put(`${BACKEND_URL}/${post.id}`, postData).
       subscribe((res) => {
         const updatedPosts = [...this.posts]
         const oldPostIndex = updatedPosts.findIndex(p => p.id === postData.id)
@@ -86,7 +89,7 @@ export class PostCreateService {
   }
 
   deletePost(postId: string) {
-    this.http.delete(`http://localhost:3000/api/posts/${postId}`)
+    this.http.delete(`${BACKEND_URL}/${postId}`)
       .subscribe(() => {
         this.posts = this.posts.filter(post => post.id !== postId)
         this.post$.next([...this.posts])
@@ -98,7 +101,6 @@ export class PostCreateService {
   }
 
   getPost(id: string) {
-    return this.http.get<{ post: { _id: string, title: string, content: string, imagePath: string, creator: string } }>(`http://localhost:3000/api/posts/${id}`)
-    // return { ...this.posts?.find(post => post.id === id) }
+    return this.http.get<{ post: { _id: string, title: string, content: string, imagePath: string, creator: string } }>(`${BACKEND_URL}/${id}`)
   }
 }
