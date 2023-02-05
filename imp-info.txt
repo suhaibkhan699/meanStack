@@ -1,3 +1,0 @@
-mongo db
-username: suhaibkhan
-pwd: 0vVbJb6NXIe7pSM7
