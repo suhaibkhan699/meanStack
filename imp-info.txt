@@ -1,3 +1,1 @@
-mongo db
-username: suhaibkhan
-pwd: 0vVbJb6NXIe7pSM7
+mongo db account: suhaib.khan.coding@gmail.com
