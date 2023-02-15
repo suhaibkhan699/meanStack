@@ -1,0 +1,13 @@
+.nav-item.logout {
+  align-self: center;
+}
+
+.nav-item.logout button{
+  background-color:  #ff6666;
+}
+
+@media only screen and (max-width: 600px) {
+  .navbar-nav {
+    display: contents;
+  }
+}

@@ -11,10 +11,35 @@
   cursor: pointer;
 }
 
-.post-image {
-  width: 10%;
+.grid-container {
+  display: grid;
+  grid-template-columns: 264px 264px 264px 264px;
+  padding: 10px;
+  column-gap: 10px;
+  row-gap: 10px;
 }
 
-.post-image img {
+.card {
+  max-height: 500px;
+}
+
+.card-image {
+  height: 250px;
+  width: 262px;
+}
+
+.card-img-top {
+  height: 100%;
   width: 100%;
+}
+
+@media only screen and (max-width: 600px) {
+  .grid-container {
+    grid-template-columns: 100%;
+  }
+
+  .card-image {
+    height: 250px;
+    width: 100%;
+  }
 }
