@@ -2,7 +2,7 @@ A full-stack application that allows users to share images anonymously, along wi
 
 <h3>Landing/Home screen:</h3>
 
-![image](https://user-images.githubusercontent.com/32563388/219866292-76566eb3-253c-4497-a592-a3582f37ecc8.png)
+![image](https://user-images.githubusercontent.com/32563388/219866863-9165f6e3-ae89-458e-9bfb-46d6de7ece01.png)
 
 <h3>Login screen:</h3>
 
