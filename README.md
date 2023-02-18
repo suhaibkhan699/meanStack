@@ -1,3 +1,5 @@
+# Anonymous Photo Sharing
+
 A full-stack application that allows users to share images anonymously, along with a title and contextual information. This application features several functionalities, including image upload, authentication, and authorization. In order to optimize the application's performance, I implemented strategies such as modularization, middlewares, and lazy loading. These techniques ensure that the application loads efficiently and quickly, without sacrificing any of its features or functionalities. The end result is a streamlined, user-friendly platform that allows users to easily and anonymously share their images and information.
 
 <h3>Landing/Home screen:</h3>
